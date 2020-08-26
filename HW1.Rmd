@@ -6,6 +6,7 @@ output:
   pdf_document: default
   html_document:
     df_print: paged
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +15,7 @@ library(ISLR)
 library(knitr)
 library(GGally)
 library(dplyr)
+options(tinytex.verbose = TRUE)
 # add other libraries here
 ```
 
@@ -46,27 +48,49 @@ help(Auto)
 3. What is the range of each quantitative predictor? You can answer this using the `range()` function.   Create a table with variable name, min, max with one row per variable.   `kable` from the package `knitr` can display tables nicely.
 
 ```{r Exercise#3}
-ranges_Auto <- t(rbind(range(Auto$mpg),range(Auto$cylinders),range(Auto$displacement),range(Auto$horsepower),range(Auto$weight),range(Auto$acceleration), range(Auto$year)))
+ranges_Auto <- t(rbind(range(Auto$mpg),
+                       range(Auto$cylinders),
+                       range(Auto$displacement),
+                       range(Auto$horsepower),
+                       range(Auto$weight),
+                       range(Auto$acceleration), 
+                       range(Auto$year)))
 rownames(ranges_Auto) <- c("Min","Max")
 knitr::kable(ranges_Auto, "pipe", 
-             col.names = c("mpg", "cylinders","displacement", "horsepower", "weight", "acceleration","year"))
+             col.names = c("mpg", "cylinders","displacement", 
+                           "horsepower", "weight", "acceleration","year"))
 ```
 
 4. What is the mean and standard deviation of each quantitative predictor? Format nicely in a table as above
 
 ```{r Exercise#4}
-centers_Auto <- rbind(c(mean(Auto$mpg),mean(Auto$cylinders),mean(Auto$displacement),mean(Auto$horsepower),mean(Auto$weight),mean(Auto$acceleration), mean(Auto$year)),c(sd(Auto$mpg),sd(Auto$cylinders),sd(Auto$displacement),sd(Auto$horsepower),sd(Auto$weight),sd(Auto$acceleration), sd(Auto$year)))
+centers_Auto <- rbind(c(mean(Auto$mpg),
+                        mean(Auto$cylinders),
+                        mean(Auto$displacement),
+                        mean(Auto$horsepower),
+                        mean(Auto$weight),
+                        mean(Auto$acceleration), 
+                        mean(Auto$year)),
+                      c(sd(Auto$mpg),
+                        sd(Auto$cylinders),
+                        sd(Auto$displacement),
+                        sd(Auto$horsepower),
+                        sd(Auto$weight),
+                        sd(Auto$acceleration), 
+                        sd(Auto$year)))
 rownames(centers_Auto) <- c("Mean","SD")
 knitr::kable(centers_Auto, "pipe", 
-             col.names = c("mpg", "cylinders","displacement", "horsepower", "weight", "acceleration","year"))
+             col.names = c("mpg", "cylinders","displacement", 
+                           "horsepower", "weight", "acceleration","year"))
 ```
 
 
 5. Investigate the predictors graphically, using scatterplot matrices  (`ggpairs`) and other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings. Try adding a caption to your figure
 ```{r Exercise#5}
-library(ggplot2)
-ggpairs(Auto[,1:3],title = "Scatterplot Matrices", progress = FALSE, ylab = NULL)
-ggpairs(Auto[,c(1,4,5)],title = "Scatterplot Matrices", progress = FALSE, ylab = NULL)
+#library(ggplot2)
+#ggpairs(Auto[,1:3],title = "Scatterplot Matrices", progress = FALSE)
+#ggpairs(Auto[,c(1,4,5)],title = "Scatterplot Matrices", progress = FALSE)
+#ggpairs(Auto[,c(1,6,7)],title = "Scatterplot Matrices", progress = FALSE)
 ```
 
 6. Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables using regression. Do your plots suggest that any of the other variables might be useful in predicting mpg using linear regression? Justify your answer.
@@ -99,13 +123,13 @@ summary(model1)
 
 8. Plot the response and the predictor using `ggplot`.  Add to the plot a line showing the least squares regression line. 
 ```{r Exercise#8}
-library(ggplot2)
-ggplot(Auto, aes(x = horsepower, y = mpg)) +
-    geom_point() +
-    stat_smooth(method = "lm", se = FALSE) +
-    labs(
-        title = "Scatterplot between mpg and horsepower with the fitted value"
-         )
+#library(ggplot2)
+#ggplot(Auto, aes(x = horsepower, y = mpg)) +
+    #geom_point() +
+    #stat_smooth(method = "lm", se = FALSE) +
+    #labs(
+        #title = "Scatterplot between mpg and horsepower with the fitted value"
+         #)
 
 ```
 
