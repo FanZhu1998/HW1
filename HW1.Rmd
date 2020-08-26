@@ -4,6 +4,8 @@ author: '[Fan Zhu | netid: fz63]'
 date: "Due August 28th, 2020"
 output:
   pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -50,7 +52,7 @@ knitr::kable(ranges_Auto, "pipe",
              col.names = c("mpg", "cylinders","displacement", "horsepower", "weight", "acceleration","year"))
 ```
 
-4. What is the mean and standard deviation of each quantitative predictor?  _Format nicely in a table as above_
+4. What is the mean and standard deviation of each quantitative predictor? Format nicely in a table as above
 
 ```{r Exercise#4}
 centers_Auto <- rbind(c(mean(Auto$mpg),mean(Auto$cylinders),mean(Auto$displacement),mean(Auto$horsepower),mean(Auto$weight),mean(Auto$acceleration), mean(Auto$year)),c(sd(Auto$mpg),sd(Auto$cylinders),sd(Auto$displacement),sd(Auto$horsepower),sd(Auto$weight),sd(Auto$acceleration), sd(Auto$year)))
@@ -60,18 +62,16 @@ knitr::kable(centers_Auto, "pipe",
 ```
 
 
-5. Investigate the predictors graphically, using scatterplot matrices  (`ggpairs`) and other tools of your choice. Create some plots
-highlighting the relationships among the predictors. Comment
-on your findings.  _Try adding a caption to your figure_
+5. Investigate the predictors graphically, using scatterplot matrices  (`ggpairs`) and other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings. Try adding a caption to your figure
 ```{r Exercise#5}
-
+library(ggplot2)
+ggpairs(Auto[,1:3],title = "Scatterplot Matrices", progress = FALSE, ylab = NULL)
+ggpairs(Auto[,c(1,4,5)],title = "Scatterplot Matrices", progress = FALSE, ylab = NULL)
 ```
 
 6. Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables using regression. Do your plots suggest that any of the other variables might be useful in predicting mpg using linear regression? Justify your answer.
 
-```{r Exercise#6}
-
-```
+Yes. The scatterplot matrices contain scatterplots between each pair of variables, from which we can observe whether there exists a linear relationship between these variables or not. The plots also contain correlations, which we can use to find which independent variable is correlated with the response/dependent variable. Besides, if the correlations between two independent variables are too high, then there is a multicollinearity issue. 
 
 
 ## Simple Linear Regression
@@ -90,13 +90,22 @@ positive or negative?
     (e) What is the predicted mpg associated with a horsepower of
 98? What are the associated 95% confidence and prediction
 intervals?   (see `help(predict)`) Provide interpretations of these for the car dealer.
-```{r Exercise#7}
 
+```{r Exercise#7}
+model1 <- lm(Auto$mpg ~ Auto$horsepower)
+summary(model1)
 ```
 
 
 8. Plot the response and the predictor using `ggplot`.  Add to the plot a line showing the least squares regression line. 
 ```{r Exercise#8}
+library(ggplot2)
+ggplot(Auto, aes(x = horsepower, y = mpg)) +
+    geom_point() +
+    stat_smooth(method = "lm", se = FALSE) +
+    labs(
+        title = "Scatterplot between mpg and horsepower with the fitted value"
+         )
 
 ```
 
@@ -112,7 +121,7 @@ intervals?   (see `help(predict)`) Provide interpretations of these for the car 
 
 10. Show that the  regression function $E(Y \mid x) = f(x)$ is the optimal 
 optimal predictor of $Y$ given $X = x$ using squared error loss:  that is $f(x)$
-minimizes $E[(Y - g(x))^2 \mid X =x]$ over all functions $g(x)$ at all points $X=x$.   _Hint:  there are at least two ways to do this.   Differentiation (so think about how to justify) - or - add and subtract the proposed optimal predictor and who that it must minimize the function._
+minimizes $E[(Y - g(x))^2 \mid X =x]$ over all functions $g(x)$ at all points $X=x$.   Hint:  there are at least two ways to do this.   Differentiation (so think about how to justify) - or - add and subtract the proposed optimal predictor and who that it must minimize the function.
 
 
 
