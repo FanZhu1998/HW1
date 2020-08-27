@@ -3,9 +3,9 @@ title: "STA521 HW1"
 author: '[Fan Zhu | netid: fz63]'
 date: "Due August 28th, 2020"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
   word_document: default
 ---
 
@@ -31,7 +31,7 @@ data(Auto)
 ## Exploratory Data Analysis
 1. Create a summary of the data.  How many variables have missing data?
 
-```{r Exercise#1}
+```{r Exercise1}
 summary(Auto)
 colSums(is.na(Auto))
 #None of the variables has missing data.
@@ -39,7 +39,7 @@ colSums(is.na(Auto))
 
 
 2.  Which of the predictors are quantitative, and which are qualitative?
-```{r Exercise#2}
+```{r Exercise2}
 help(Auto)
 ```
 Quantitative: mpg, displacement, horsepower, weight, and acceleration  
@@ -49,7 +49,7 @@ Qualitative: origin, cylinders, year and name
 
 3. What is the range of each quantitative predictor? You can answer this using the `range()` function.   Create a table with variable name, min, max with one row per variable.   `kable` from the package `knitr` can display tables nicely.
 
-```{r Exercise#3}
+```{r Exercise3}
 ranges_Auto <- rbind(range(Auto$mpg),
                        range(Auto$displacement),
                        range(Auto$horsepower),
@@ -63,7 +63,7 @@ knitr::kable(ranges_Auto, "pipe", caption = "Table1: Ranges of the Quantitative 
 
 4. What is the mean and standard deviation of each quantitative predictor? Format nicely in a table as above
 
-```{r Exercise#4}
+```{r Exercise4}
 centers_Auto <- rbind(c(mean(Auto$mpg),sd(Auto$mpg)),
                         c(mean(Auto$displacement),sd(Auto$displacement)),
                         c(mean(Auto$horsepower),sd(Auto$horsepower)),
@@ -77,7 +77,7 @@ knitr::kable(centers_Auto, "pipe", caption = "Table2: Central Tendencies for the
 
 
 5. Investigate the predictors graphically, using scatterplot matrices  (`ggpairs`) and other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings. Try adding a caption to your figure
-```{r Exercise#5, echo=TRUE, fig.width=8, message=FALSE, warning=FALSE}
+```{r Exercise5, echo=TRUE, fig.width=8, message=FALSE, warning=FALSE}
 #create pairwise comparisons scatterplot mattrices using the "ggpairs" function
 library(ggplot2)
 library(GGally)
@@ -124,7 +124,7 @@ positive or negative?
 98? What are the associated 95% confidence and prediction
 intervals?   (see `help(predict)`) Provide interpretations of these for the car dealer.
 
-```{r Exercise#7}
+```{r Exercise7}
 #run a regression with mpg as the response and horsepower as the predictor.
 model1 <- lm(mpg ~ horsepower, data = Auto)
 summary(model1)
@@ -148,7 +148,7 @@ In other words, we are 95% confidence that the average mpg of a car, whose horse
 
 
 8. Plot the response and the predictor using `ggplot`.  Add to the plot a line showing the least squares regression line. 
-```{r Exercise#8}
+```{r Exercise8}
 ggplot(Auto, aes(x = horsepower, y = mpg)) + 
   geom_point() + geom_smooth(method = "lm", formula = y ~ x)
 ```
@@ -156,11 +156,11 @@ ggplot(Auto, aes(x = horsepower, y = mpg)) +
 
 9. Use the `plot()` function to produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the model regarding assumptions for using a simple linear regression.  
 
-```{r Exercise#9}
+```{r Exercise9}
 par(mfrow = c(2, 2)) 
 plot(model1)
 ```
-Interpretations on Q9 here.
+Interpretations on Q9 plots:
 The "Residual vs. Fitted" plot exhibits a relatively U-shape curve rather than a horizontal line, which implies that 
 
 ## Theory
