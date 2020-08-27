@@ -38,7 +38,7 @@ colSums(is.na(Auto))
 2.  Which of the predictors are quantitative, and which are qualitative?
 ```{r Exercise#2}
 help(Auto)
-#Quantitative: mpg, displacement, horsepower, weight, acceleration and 
+#Quantitative: mpg, displacement, horsepower, weight, and acceleration  
 
 #Qualitative: origin, cylinders, year and name
 
@@ -47,38 +47,29 @@ help(Auto)
 3. What is the range of each quantitative predictor? You can answer this using the `range()` function.   Create a table with variable name, min, max with one row per variable.   `kable` from the package `knitr` can display tables nicely.
 
 ```{r Exercise#3}
-ranges_Auto <- t(rbind(range(Auto$mpg),
+ranges_Auto <- rbind(range(Auto$mpg),
                        range(Auto$displacement),
                        range(Auto$horsepower),
                        range(Auto$weight),
-                       range(Auto$acceleration))) 
-rownames(ranges_Auto) <- c("Min","Max")
+                       range(Auto$acceleration))
+rownames(ranges_Auto) <- c("mpg","displacement", 
+                           "horsepower", "weight", "acceleration")
 knitr::kable(ranges_Auto, "pipe", caption = "Table1: Ranges of the Quantitative Variables",
-             col.names = c("mpg","displacement", 
-                           "horsepower", "weight", "acceleration"))
+             col.names = c("Min","Max"))
 ```
 
 4. What is the mean and standard deviation of each quantitative predictor? Format nicely in a table as above
 
 ```{r Exercise#4}
-centers_Auto <- rbind(c(mean(Auto$mpg),
-                        mean(Auto$cylinders),
-                        mean(Auto$displacement),
-                        mean(Auto$horsepower),
-                        mean(Auto$weight),
-                        mean(Auto$acceleration), 
-                        mean(Auto$year)),
-                      c(sd(Auto$mpg),
-                        sd(Auto$cylinders),
-                        sd(Auto$displacement),
-                        sd(Auto$horsepower),
-                        sd(Auto$weight),
-                        sd(Auto$acceleration), 
-                        sd(Auto$year)))
-rownames(centers_Auto) <- c("Mean","SD")
+centers_Auto <- rbind(c(mean(Auto$mpg),sd(Auto$mpg)),
+                        c(mean(Auto$displacement),sd(Auto$displacement)),
+                        c(mean(Auto$horsepower),sd(Auto$horsepower)),
+                        c(mean(Auto$weight),sd(Auto$weight)),
+                        c(mean(Auto$acceleration),sd(Auto$acceleration)))
+rownames(centers_Auto) <- c("mpg", "displacement", 
+                           "horsepower", "weight", "acceleration")
 knitr::kable(centers_Auto, "pipe", caption = "Table2: Central Tendencies for the Quantitative Variables",
-             col.names = c("mpg", "cylinders","displacement", 
-                           "horsepower", "weight", "acceleration","year"))
+             col.names = c("Mean","SD"))
 ```
 
 
