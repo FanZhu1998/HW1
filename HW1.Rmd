@@ -3,9 +3,9 @@ title: "STA521 HW1"
 author: '[Fan Zhu | netid: fz63]'
 date: "Due August 28th, 2020"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
   word_document: default
 ---
 
@@ -77,7 +77,7 @@ knitr::kable(centers_Auto, "pipe", caption = "Table2: Central Tendencies for the
 
 
 5. Investigate the predictors graphically, using scatterplot matrices  (`ggpairs`) and other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings. Try adding a caption to your figure
-```{r Exercise#5, fig.width=8, warning=FALSE, message=FALSE, echo = FALSE}
+```{r Exercise#5, echo=TRUE, fig.width=8, message=FALSE, warning=FALSE}
 #create pairwise comparisons scatterplot mattrices using the "ggpairs" function
 library(ggplot2)
 library(GGally)
@@ -161,7 +161,7 @@ par(mfrow = c(2, 2))
 plot(model1)
 ```
 Interpretations on Q9 here.
-
+The "Residual vs. Fitted" plot exhibits a relatively U-shape curve rather than a horizontal line, which implies that 
 
 ## Theory
 
