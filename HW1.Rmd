@@ -38,27 +38,24 @@ colSums(is.na(Auto))
 2.  Which of the predictors are quantitative, and which are qualitative?
 ```{r Exercise#2}
 help(Auto)
-#Quantitative: mpg, cylinders, displacement, horsepower, weight, acceleration and year.
+#Quantitative: mpg, displacement, horsepower, weight, acceleration and 
 
-#Qualitative: origin and name
+#Qualitative: origin, cylinders, year and name
 
-#Note that the variables "cylinders" and "year" can, technically, also be treated as qualitative variable but I take them as quantitative variables here.
 ```
 
 3. What is the range of each quantitative predictor? You can answer this using the `range()` function.   Create a table with variable name, min, max with one row per variable.   `kable` from the package `knitr` can display tables nicely.
 
 ```{r Exercise#3}
 ranges_Auto <- t(rbind(range(Auto$mpg),
-                       range(Auto$cylinders),
                        range(Auto$displacement),
                        range(Auto$horsepower),
                        range(Auto$weight),
-                       range(Auto$acceleration), 
-                       range(Auto$year)))
+                       range(Auto$acceleration))) 
 rownames(ranges_Auto) <- c("Min","Max")
-knitr::kable(ranges_Auto, "pipe", 
-             col.names = c("mpg", "cylinders","displacement", 
-                           "horsepower", "weight", "acceleration","year"))
+knitr::kable(ranges_Auto, "pipe", caption = "Table1: Ranges of the Quantitative Variables",
+             col.names = c("mpg","displacement", 
+                           "horsepower", "weight", "acceleration"))
 ```
 
 4. What is the mean and standard deviation of each quantitative predictor? Format nicely in a table as above
@@ -79,7 +76,7 @@ centers_Auto <- rbind(c(mean(Auto$mpg),
                         sd(Auto$acceleration), 
                         sd(Auto$year)))
 rownames(centers_Auto) <- c("Mean","SD")
-knitr::kable(centers_Auto, "pipe", 
+knitr::kable(centers_Auto, "pipe", caption = "Table2: Central Tendencies for the Quantitative Variables",
              col.names = c("mpg", "cylinders","displacement", 
                            "horsepower", "weight", "acceleration","year"))
 ```
@@ -116,9 +113,16 @@ positive or negative?
 intervals?   (see `help(predict)`) Provide interpretations of these for the car dealer.
 
 ```{r Exercise#7}
-model1 <- lm(Auto$mpg ~ Auto$horsepower)
+model1 <- lm(mpg ~ horsepower, data = Auto)
 summary(model1)
+predict(model1, newdata = data.frame(horsepower = c(98)), interval = 'confidence')
 ```
+7(a) Yes. There is a relationship between the predictor and the response. The P value for the beta in the regression is smaller than 0.05. Thus, we can reject the null hypothesis that the beta is zero, which means that there is a significant nonzero relationship between teh predictor and the response. 
+7(b) The beta is -0.157845, which means that holding everything else constant, every one unit increase in the horsepower will decrease the mpg by 0.157845. And as we have discussed in 7(a), the beta is significant.
+7(c) The relationship between the predictor and the response is negative because the beta is negative.
+7(d) Holding everything else constant, every one unit increase in the horsepower will decrease the mpg by 0.157845. That is, higher horsepower leads to more fuel consumption (less miles per gallon). There is a trade-off between performance and the car's costs on fuels. 
+7(e) The predicted mpg associated with a horsepower of 98 is 24.46708. The lower bound of the 95% confidence interval is 23.97308 and the upper bound of the interval is 24.96108. We can tell the dealer that with a horsepower of 98, the car would run 24.46708 miles per gallon of gasoline. A more stats-version of the confidence interval is that: if we take the samples repeatedly and computed the 95% confidence interval for each sample, 95% of the intervals would contain the true population mean. 
+
 
 
 8. Plot the response and the predictor using `ggplot`.  Add to the plot a line showing the least squares regression line. 
