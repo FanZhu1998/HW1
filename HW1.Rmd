@@ -161,7 +161,11 @@ par(mfrow = c(2, 2))
 plot(model1)
 ```
 Interpretations on Q9 plots:
-The "Residual vs. Fitted" plot exhibits a relatively U-shape curve rather than a horizontal line, which implies that 
+The "Residual vs. Fitted" plot exhibits a non-linear trend between the residuals and the fitted values, which implies a violation of the linearity assumption of the model.
+The normal Q-Q plot shows that most of the data fit the diagonal line except some data on the left and right ends. The ideal case of the Q-Q plot is a perfect match to the diagonal line. Our Q-Q plot shows the data is not very far from a normal distribution but there are still some deviations. 
+The Scale-Location plot shows an U-shaped curve, which implies that the variance of the residuals does not stay constant along the fitted values. Therefore, the assumption of homoscedasticity (equal variance) is violated. 
+The Residuals vs. Leverage plot shows that almost all the data points are within the Cook's distance lines, which indicates that there is no influential case. 
+In conclusion, from the diagnostics plots above, we can find that the residuals may not be normally distributed with a mean of zero and a constant variance. 
 
 ## Theory
 
