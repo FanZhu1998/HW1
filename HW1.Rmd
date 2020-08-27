@@ -16,6 +16,7 @@ library(knitr)
 library(GGally)
 library(dplyr)
 library(tinytex)
+library(tidyverse)
 options(tinytex.verbose = TRUE)
 # set knit options and loaded libraries
 ```
