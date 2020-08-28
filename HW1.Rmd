@@ -200,18 +200,43 @@ $$Y_i = f(x_i) + \epsilon$$
 $$E[Y \mid X = x_o] = E[f(X) + \epsilon \mid X = x_o]$$
 $$ = E[f(X)] + E[\epsilon \mid X = x_o]$$
 $$ = f(x_o) + E[\epsilon \mid X = x_o]$$
-$$(\text{Because \epsilon and X are supposed to be independent})$$
+$$(\text{Because}\: \epsilon \: \text{and X are supposed to be independent})$$
 $$ = f(x_o) + E[\epsilon]$$
 $$ = f(x_o) + 0 = f(x_o)$$
 
 
 
   (b) What is the conditional variance of $Y$ given that $X = x_o$? ($\text{Var}_{Y \mid X}[Y]$)
+$$\text{Var}[Y \mid X = x_o] = \text{Var}[f(X) + \epsilon  \mid X = x_o]$$
+
+$$= \text{Var}[f(x_o) + \epsilon  \mid X = x_o]$$
+$$(\text{Because} \: Var(f(x_o) = 0)$$
+$$= \text{Var}[ \epsilon  \mid X = x_o]$$
+$$(\text{Because}\: \epsilon \: \text{and X are supposed to be independent})$$
+$$= \text{Var}[ \epsilon] = \sigma^2$$
+  
+  
   (c) show  that for any estimator $\hat{f}(x)$ that the conditional (given X) (expected)  Mean Squared Error can be decomposed as 
 $$E_{Y \mid X}[(Y - \hat{f}(x_o))^2] = \underbrace{ \text{Var}_{Y \mid X}[\hat{f}(x_o)]}_{\textit{Variance of estimator}} +
 \underbrace{(f(x) - E_{Y \mid X}[\hat{f}(x_o)])^2}_{\textit{Squared Bias}} + \underbrace{\textsf{Var}(\epsilon)}_{\textit{Irreducible}}
 $$
  _Hint:  try the add zero trick of adding and subtracting expected values_
+
+ $$E_{Y \mid X}[(Y - \hat{f}(x_o))^2]$$
+$$= E_{Y \mid X}[(Y - f(x_o) + f(x_o) - E_{Y \mid X}[\hat{f}(x_o)] + E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2]$$
+$$= E_{Y \mid X}[(Y - f(x_o))^2] + E_{Y \mid X}[(f(x_o) - E_{Y \mid X}[\hat{f}(x_o)])^2] + E_{Y \mid X}[(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2)^2]$$
+$$+ 2E_{Y \mid X}[(Y - f(x_o))(f(x_o) - E_{Y \mid X}[\hat{f}(x_o)])]$$
+$$+ 2E_{Y \mid X}[(f(x_o) - E_{Y \mid X}[\hat{f}(x_o)])(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2)]$$
+$$+ 2E_{Y \mid X}[(Y - f(x_o))(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2)]$$
+$$= E_{Y \mid X}[\epsilon^2] + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y \mid X}[\hat{f}(x_o)]$$
+$$+ (f(x_o) - E_{Y \mid X}[\hat{f}(x_o)])E_{Y \mid X}[\epsilon] + (f(x_o) - E_{Y \mid X}[\hat{f}(x_o)])(E_{Y \mid X}[(E_{Y \mid X}[\hat{f}(x_o)]-E_{Y \mid X}[\hat{f}(x_o)])$$
+$$+E_{Y \mid X}[(E_{Y \mid X}[\hat{f}(x_o)]E_{Y \mid X}[\epsilon]-E_{Y \mid X}[\hat{f}(x_o)\epsilon]$$
+$$= \text{Var}(\epsilon) + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y \mid X}[\hat{f}(x_o)] + 0 + 0 + 0 $$
+$$=\text{Var}(\epsilon) + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y \mid X}[\hat{f}(x_o)]$$
+ 
+ Q.E.D
+ 
+ 
   (d) Explain why even if $N$ goes to infinity the above can never go to zero.
 e.g. even if we can learn $f(x)$ perfectly that the error in prediction will not vanish.   
   (e) Decompose the unconditional mean squared error
