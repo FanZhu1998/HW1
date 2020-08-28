@@ -178,8 +178,10 @@ $$E[(Y −g(x))^2 |X =x]=E[(Y −f(x)+f(x)−g(x))^2 |X =x]\\
 =E[((Y −f(x))+(f(x)−g(x)))^2 |X =x] \\
 =E[(Y −f(x))^2 +(f(x)−g(x))^2 +2(Y −f(x))(f(x)−g(x))|X =x]\\
 =E[(Y −f(x))^2 |X =x]+E[(f(x)−g(x))^2 |X =x]+E[2(Y −f(x))(f(x)−g(x))|X =x]\\
+((f(x) − g(x))\: \mbox{can be treated as a constant because they are conditional on}\: X=x)\\
 =E[(Y −f(x))^2 |X =x]+(f(x)−g(x))^2 +2(f(x)−g(x))E[Y −f(x)|X =x]\\
 =E[(Y −f(x))^2 |X =x]+(f(x)−g(x))^2 +2(f(x)−g(x))(E(Y |X =x)−f(x))\\
+(Because\:E(Y |X =x)−f(x))\\
 =E[(Y −f(x))^2 |X =x]+(f(x)−g(x))^2 +2(f(x)−g(x))(f(x)−f(x))\\
 =E[(Y −f(x))^2 |X =x]+(f(x)−g(x))^2\\
 ≥ E[(Y − f(x))^2 | X = x]
