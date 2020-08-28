@@ -197,6 +197,15 @@ $$ x_i \sim h(x), \text{ the design distribution}$$
 $$ \epsilon_i \sim g(y), \text{ with mean 0 and variance } \sigma^2 \text{ and are independent of the } x_i $$
 $$Y_i = f(x_i) + \epsilon$$
   (a) What is the conditional expectation of $Y$ given that $X = x_o$?  ($E_{Y \mid X}[Y]$)
+$$E[Y \mid X = x_o] = E[f(X) + \epsilon \mid X = x_o]$$
+$$ = E[f(X)] + E[\epsilon \mid X = x_o]$$
+$$ = f(x_o) + E[\epsilon \mid X = x_o]$$
+$$(\text{Because \epsilon and X are supposed to be independent})$$
+$$ = f(x_o) + E[\epsilon]$$
+$$ = f(x_o) + 0 = f(x_o)$$
+
+
+
   (b) What is the conditional variance of $Y$ given that $X = x_o$? ($\text{Var}_{Y \mid X}[Y]$)
   (c) show  that for any estimator $\hat{f}(x)$ that the conditional (given X) (expected)  Mean Squared Error can be decomposed as 
 $$E_{Y \mid X}[(Y - \hat{f}(x_o))^2] = \underbrace{ \text{Var}_{Y \mid X}[\hat{f}(x_o)]}_{\textit{Variance of estimator}} +
