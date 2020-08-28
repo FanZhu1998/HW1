@@ -249,7 +249,36 @@ $$=\text{Var}(\epsilon) + 0 + 0 = \text{Var}(\epsilon) \: \text{,which is irredu
 Therefore, $E_{Y \mid X}[(Y - \hat{f}(x_o))^2]$ will never equal zero.
 Q.E.D
 
+
   (e) Decompose the unconditional mean squared error
 $$E_{Y, X}(f(x_o) - \hat{f}(x_o))^2$$
 into a squared bias and a variance component. (See ELS 2.7(c))
+$$E_{Y, X}(f(x_o) - \hat{f}(x_o))^2 = E_{Y, X}[(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)] + E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2]$$
+$$= E_{Y, X}[(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)])^2] + E_{Y, X}[(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2]$$
+$$+ 2E_{Y \mid X}[(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)])(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))]$$
+$$=(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)])^2 + E_{Y, X}[(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))^2]$$
+$$+ 2E_{Y \mid X}[(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)])(E_{Y \mid X}[\hat{f}(x_o)] - \hat{f}(x_o))]$$
+$$=\text{SquaredBias}_{Y \mid X}(\hat{f}(x_o)) + \text{Var}_{Y \mid X}(\hat{f}(x_o)) + 2E_{Y \mid X}[(f(x_o) -E_{Y \mid X}[\hat{f}(x_o)])*0]$$
+$$= \text{SquaredBias}_{Y \mid X}(\hat{f}(x_o)) + \text{Var}_{Y \mid X}(\hat{f}(x_o)) + 0$$
+To conlcude,
+$$E_{Y, X}(f(x_o) - \hat{f}(x_o))^2 = \text{SquaredBias}_{Y \mid X}(\hat{f}(x_o)) + \text{Var}_{Y \mid X}(\hat{f}(x_o)) $$
+Q.E.D
+
+
+
   (f) Establish a relationship between the squared biases and variance in the above Mean squared errors.
+From Q11-part(c), we obtained
+$$E_{Y \mid X}[(Y - \hat{f}(x_o))^2] =\text{Var}(\epsilon) + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y \mid X}[\hat{f}(x_o)]$$
+which can be rewritten as
+$$E_{Y \mid X}[(Y - \hat{f}(x_o))^2] =\text{Var}(\epsilon) + E_{Y \mid X}[f(x_o)-E_{Y \mid X}[\hat{f}(x_o)]]^2 $$
+Apply the law of iterated expectations,
+$$E_{X}E_{Y \mid X}[(Y - \hat{f}(x_o))^2] =\text{Var}(\epsilon) + E_{Y \mid X}[(f(x_o)-E_{Y \mid X}[\hat{f}(x_o)]]^2] $$
+Combine the result with Q11-part(e),
+$$E_{X}[((f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2] + E_{X}[\text{Var}_{Y \mid X}[\hat{f}(x_o)] =\text{Var}(\hat{f}(x_o)) + ((f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 $$
+According to the law of total variance,
+$$E_{X}[\text{Var}_{Y \mid X}[\hat{f}(x_o)] \leq \text{Var}(\hat{f}(x_o)) $$
+$$E_{X}[((f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2] \geq ((f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 $$
+
+In conclusion, the unconditional variance is expected to be greater than the conditional variance and the unconditional squared bias is expected to be smaller than the conditional squared bias.
+
+(Thank you for your time and patience in grading this homework.)
