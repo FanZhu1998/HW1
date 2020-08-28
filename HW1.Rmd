@@ -83,6 +83,7 @@ library(ggplot2)
 library(GGally)
 ggpairs(Auto[,c(1,3,4,5,6)],title = "Pairwise Comparisons of 5 Quantitative Variables", progress = FALSE)
 
+
 #create a boxplot of MPG for different Auto Origins
 boxplot(mpg~origin,
 data=Auto,
@@ -101,10 +102,14 @@ ylab="MPG"
 )
 
 ```
+In the pairewise scatterplot matrices I compared each pair of the quantitative variables. From the plot we can observe whether there exists a positive or negative linear relationship between each pair of variables. We can see that most of the scatterplots exhibited some forms of patterns. The right upper matrices showed the correlations between each pair of quantitative variables. All of the correlations here are statistically significant (significantly different from zero). And the correlation between the car's weight and displacement is the strongest. 
+In the of MPG for different Auto Origins, we can observe that the Japanese cars have the highest average mpg among the cars from different origins and the American cars have the lowest average mpg. The interquartile range of the Japanese cars is higher than that of the American and European cars. 
+In the boxplot of MPG for different Auto Years, we can see that the cars from 1980 tend to have the highest average mpg, while the cars from 1970 tend to have the lowest average mpg, which might imply that the older the car the lower mpg. The cars from 1974 have relatively unusual high mpg compared to the cars from 1973~1975. 
+
 
 6. Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables using regression. Do your plots suggest that any of the other variables might be useful in predicting mpg using linear regression? Justify your answer.
 
-Yes. The scatterplot matrices contain scatterplots between each pair of variables, from which we can observe whether there exists a linear relationship between these variables or not. The plots also contain correlations, which we can use to find which independent variable is correlated with the response/dependent variable. Besides, if the correlations between two independent variables are too high, then there is a multicollinearity issue. 
+Yes. The scatterplot matrices contain scatterplots between each pair of variables, from which we can observe whether there exists a positive or negative linear relationship between these variables or not. The plots also contain correlations, which we can use to find which independent variable is correlated with the response/dependent variable. Besides, if the correlations between two independent variables are too high, then there is a multicollinearity issue. Since the scatterplot matrices in Q5 shows that some of the relationships might be not linear, we would need to log transform the variables.
 
 
 ## Simple Linear Regression
