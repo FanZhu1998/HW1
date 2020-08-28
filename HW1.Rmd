@@ -238,7 +238,17 @@ $$=\text{Var}(\epsilon) + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y 
  
  
   (d) Explain why even if $N$ goes to infinity the above can never go to zero.
-e.g. even if we can learn $f(x)$ perfectly that the error in prediction will not vanish.   
+e.g. even if we can learn $f(x)$ perfectly that the error in prediction will not vanish.
+
+If $N$ goes to infinity, then $\text{Var}_{Y \mid X}[\hat{f}(x_o)]$ will converge to $0$. 
+If we learn $f(x)$ perfectly, then $f(x_o) = E_{Y \mid X}[\hat{f}(x_o)$. 
+Thus, $(f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 = 0$.
+Combining the above-mentioned two conditions, we have 
+$$E_{Y \mid X}[(Y - \hat{f}(x_o))^2]=\text{Var}(\epsilon) + (f(x_o)-E_{Y \mid X}[\hat{f}(x_o)])^2 + \text{Var}_{Y \mid X}[\hat{f}(x_o)]$$
+$$=\text{Var}(\epsilon) + 0 + 0 = \text{Var}(\epsilon) \: \text{,which is irreducible}$$
+Therefore, $E_{Y \mid X}[(Y - \hat{f}(x_o))^2]$ will never equal zero.
+Q.E.D
+
   (e) Decompose the unconditional mean squared error
 $$E_{Y, X}(f(x_o) - \hat{f}(x_o))^2$$
 into a squared bias and a variance component. (See ELS 2.7(c))
